@@ -4,7 +4,7 @@ function App() {
   const [data, setData] = useState("");
 
   useEffect(() => {
-    fetch("https://testapp-pjx8.onrender.com/api/test")
+    fetch(`${process.env.REACT_APP_API_BASE_URL}/api/test`)
       .then((res) => res.json())
       .then((data) => setData(data.message))
       .catch((err) => console.error(err));
