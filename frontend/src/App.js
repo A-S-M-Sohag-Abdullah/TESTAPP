@@ -4,7 +4,7 @@ function App() {
   const [data, setData] = useState("");
 
   useEffect(() => {
-    fetch("https://testapp-of9p.onrender.com/api/test")
+    fetch("https://testapp-pjx8.onrender.com/api/test")
       .then((res) => res.json())
       .then((data) => setData(data.message))
       .catch((err) => console.error(err));
