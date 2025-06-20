@@ -1,26 +1,31 @@
 import React, { useEffect, useState } from "react";
-import axiosInstance from "./api/axiosInstance";
+import { io } from "socket.io-client";
+
+const socket = io(process.env.REACT_APP_API_BASE_URL, {
+  withCredentials: true,
+});
 
 function App() {
-  const [message, setMessage] = useState("");
+  const [response, setResponse] = useState("");
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axiosInstance.get("/api/test");
-        setMessage(res.data.message);
-      } catch (err) {
-        console.error("API Error:", err);
-      }
-    };
+    // Listen for messages from the server
+    socket.on("server-response", (msg) => {
+      setResponse(msg);
+    });
 
-    fetchData();
+    // Send a test message to server
+    socket.emit("client-message", "Hello from frontend");
+
+    return () => {
+      socket.disconnect();
+    };
   }, []);
 
   return (
     <div style={{ padding: "2rem" }}>
-      <h1>React Frontend</h1>
-      <p>API Response: {message}</p>
+      <h1>Socket.IO Test</h1>
+      <p>Server Response: {response}</p>
     </div>
   );
 }
