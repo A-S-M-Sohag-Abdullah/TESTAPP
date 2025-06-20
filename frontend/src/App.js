@@ -1,22 +1,25 @@
 import React, { useEffect, useState } from "react";
 
 function App() {
-  const [data, setData] = useState("");
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_BASE_URL}/api/test`, {
-      method: "GET",
-      credentials: "include",
-    })
-      .then((res) => res.json())
-      .then((data) => setData(data.message))
-      .catch((err) => console.error(err));
+    const fetchData = async () => {
+      try {
+        const res = await axiosInstance.get("/api/test");
+        setMessage(res.data.message);
+      } catch (err) {
+        console.error("API Error:", err);
+      }
+    };
+
+    fetchData();
   }, []);
 
   return (
     <div style={{ padding: "2rem" }}>
       <h1>React Frontend</h1>
-      <p>API Response: {data}</p>
+      <p>API Response: {message}</p>
     </div>
   );
 }
