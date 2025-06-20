@@ -6,9 +6,9 @@ const app = express();
 app.use(
   cors({
     origin: "https://testapp-six-ochre.vercel.app/",
-    credentials: true,
+    /* credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    allowedHeaders: ["Content-Type", "Authorization"], */
   })
 );
 app.use(express.json());
