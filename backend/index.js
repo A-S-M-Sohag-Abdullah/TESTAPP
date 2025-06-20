@@ -5,10 +5,9 @@ require("dotenv").config();
 const app = express();
 app.use(
   cors({
-    origin: "*",
-    /* credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"], */
+    origin: "https://testapp-six-ochre.vercel.app/",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    credentials: true,
   })
 );
 app.use(express.json());
